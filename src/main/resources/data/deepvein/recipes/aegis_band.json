@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " I ",
+    "IGI",
+    " I "
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "G": {
+      "item": "deepvein:gloomsilver_ingot"
+    }
+  },
+  "result": {
+    "item": "deepvein:aegis_band",
+    "count": 1
+  }
+}

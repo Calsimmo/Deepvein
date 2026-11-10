@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "M M",
+    "M M"
+  ],
+  "key": {
+    "M": {
+      "item": "deepvein:emberite_ingot"
+    }
+  },
+  "result": {
+    "item": "deepvein:emberite_boots",
+    "count": 1
+  }
+}

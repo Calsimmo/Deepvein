@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " D ",
+    "DAD",
+    " D "
+  ],
+  "key": {
+    "D": {
+      "item": "deepvein:stardust"
+    },
+    "A": {
+      "item": "minecraft:amethyst_shard"
+    }
+  },
+  "result": {
+    "item": "deepvein:mana_star",
+    "count": 1
+  }
+}

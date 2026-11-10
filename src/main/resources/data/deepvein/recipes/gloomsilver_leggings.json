@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "MMM",
+    "M M",
+    "M M"
+  ],
+  "key": {
+    "M": {
+      "item": "deepvein:gloomsilver_ingot"
+    }
+  },
+  "result": {
+    "item": "deepvein:gloomsilver_leggings",
+    "count": 1
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "M M",
+    "M M"
+  ],
+  "key": {
+    "M": {
+      "item": "deepvein:aetherium_ingot"
+    }
+  },
+  "result": {
+    "item": "deepvein:aetherium_boots",
+    "count": 1
+  }
+}

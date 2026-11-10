@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "deepvein:raw_emberite"
+  },
+  "result": "deepvein:emberite_ingot",
+  "experience": 0.8,
+  "cookingtime": 100
+}

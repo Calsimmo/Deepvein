@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "deepvein:raw_gloomsilver"
+    },
+    {
+      "item": "deepvein:raw_gloomsilver"
+    },
+    {
+      "item": "deepvein:raw_gloomsilver"
+    },
+    {
+      "item": "deepvein:raw_gloomsilver"
+    },
+    {
+      "item": "deepvein:warden_core"
+    }
+  ],
+  "result": {
+    "item": "deepvein:gloomsilver_ingot",
+    "count": 4
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#minecraft:is_overworld",
+  "features": [
+    "deepvein:ore_emberite",
+    "deepvein:ore_gloomsilver",
+    "deepvein:ore_aetherium",
+    "deepvein:ore_life_crystal",
+    "deepvein:blight_patch"
+  ],
+  "step": "underground_ores"
+}

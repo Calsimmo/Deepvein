@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "M M",
+    "MMM",
+    "MMM"
+  ],
+  "key": {
+    "M": {
+      "item": "deepvein:emberite_ingot"
+    }
+  },
+  "result": {
+    "item": "deepvein:emberite_chestplate",
+    "count": 1
+  }
+}

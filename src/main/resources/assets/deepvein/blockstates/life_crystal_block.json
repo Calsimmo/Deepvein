@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "deepvein:block/life_crystal_block"
+    }
+  }
+}

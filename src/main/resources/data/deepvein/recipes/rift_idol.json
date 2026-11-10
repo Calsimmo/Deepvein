@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BGB",
+    "GEG",
+    "BGB"
+  ],
+  "key": {
+    "B": {
+      "item": "deepvein:blight_spore"
+    },
+    "G": {
+      "item": "deepvein:gloomsilver_ingot"
+    },
+    "E": {
+      "item": "minecraft:ender_eye"
+    }
+  },
+  "result": {
+    "item": "deepvein:rift_idol",
+    "count": 1
+  }
+}

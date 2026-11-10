@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "EDE",
+    "DLD",
+    "EDE"
+  ],
+  "key": {
+    "E": {
+      "item": "deepvein:emberite_ingot"
+    },
+    "D": {
+      "item": "deepvein:stardust"
+    },
+    "L": {
+      "item": "minecraft:lantern"
+    }
+  },
+  "result": {
+    "item": "deepvein:gloom_lantern",
+    "count": 1
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DGD",
+    "GBG",
+    "DGD"
+  ],
+  "key": {
+    "D": {
+      "item": "deepvein:stardust"
+    },
+    "G": {
+      "item": "deepvein:gloomsilver_ingot"
+    },
+    "B": {
+      "item": "minecraft:book"
+    }
+  },
+  "result": {
+    "item": "deepvein:storm_tome",
+    "count": 1
+  }
+}

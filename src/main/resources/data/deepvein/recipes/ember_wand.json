@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " CE",
+    " SC",
+    "S  "
+  ],
+  "key": {
+    "E": {
+      "item": "deepvein:emberite_ingot"
+    },
+    "C": {
+      "item": "minecraft:coal"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "deepvein:ember_wand",
+    "count": 1
+  }
+}

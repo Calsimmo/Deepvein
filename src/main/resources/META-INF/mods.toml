@@ -1,0 +1,26 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="All Rights Reserved"
+
+[[mods]]
+modId="deepvein"
+version="0.1.0"
+displayName="Deepvein"
+description="""
+An action-RPG overhaul: mana and magic, accessories, life crystals, three ore tiers,
+a spreading blight, two bosses and a town merchant.
+"""
+
+[[dependencies.deepvein]]
+modId="forge"
+mandatory=true
+versionRange="[47,)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.deepvein]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.20.1,1.21)"
+ordering="NONE"
+side="BOTH"

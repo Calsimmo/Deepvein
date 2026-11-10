@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " IG",
+    " SI",
+    "S  "
+  ],
+  "key": {
+    "G": {
+      "item": "deepvein:gloomsilver_ingot"
+    },
+    "I": {
+      "item": "minecraft:ice"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "deepvein:frost_staff",
+    "count": 1
+  }
+}

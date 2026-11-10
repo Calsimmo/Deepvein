@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "MMM",
+    "M M"
+  ],
+  "key": {
+    "M": {
+      "item": "deepvein:gloomsilver_ingot"
+    }
+  },
+  "result": {
+    "item": "deepvein:gloomsilver_helmet",
+    "count": 1
+  }
+}

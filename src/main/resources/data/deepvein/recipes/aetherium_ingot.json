@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "deepvein:raw_aetherium"
+    },
+    {
+      "item": "deepvein:raw_aetherium"
+    },
+    {
+      "item": "deepvein:raw_aetherium"
+    },
+    {
+      "item": "deepvein:raw_aetherium"
+    },
+    {
+      "item": "deepvein:tyrant_heart"
+    }
+  ],
+  "result": {
+    "item": "deepvein:aetherium_ingot",
+    "count": 4
+  }
+}

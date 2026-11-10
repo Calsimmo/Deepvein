@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " E ",
+    "EME",
+    " E "
+  ],
+  "key": {
+    "E": {
+      "item": "deepvein:emberite_ingot"
+    },
+    "M": {
+      "item": "minecraft:magma_cream"
+    }
+  },
+  "result": {
+    "item": "deepvein:ember_charm",
+    "count": 1
+  }
+}

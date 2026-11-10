@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " F ",
+    "FDF",
+    " B "
+  ],
+  "key": {
+    "F": {
+      "item": "minecraft:feather"
+    },
+    "D": {
+      "item": "deepvein:stardust"
+    },
+    "B": {
+      "item": "minecraft:slime_ball"
+    }
+  },
+  "result": {
+    "item": "deepvein:cloud_charm",
+    "count": 1
+  }
+}

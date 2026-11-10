@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:bone_meal"
+    },
+    {
+      "item": "minecraft:glowstone_dust"
+    },
+    {
+      "item": "deepvein:stardust"
+    }
+  ],
+  "result": {
+    "item": "deepvein:purity_powder",
+    "count": 4
+  }
+}
