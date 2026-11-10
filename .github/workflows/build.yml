@@ -22,3 +22,16 @@ jobs:
         with:
           name: deepvein-mod
           path: build/libs/*.jar
+      - name: Smoke test (start a dedicated server with the mod)
+        run: |
+          mkdir -p run
+          echo "eula=true" > run/eula.txt
+          timeout 480 gradle runServer --no-daemon > server.log 2>&1 || true
+          echo "---- deepvein / error lines ----"
+          grep -n -i "deepvein\|exception\|couldn't\|could not\|failed\|Done (" server.log | head -200 || true
+          grep -q "Done (" server.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: server-log
+          path: server.log
