@@ -7,6 +7,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
@@ -26,10 +28,26 @@ jobs:
         run: |
           mkdir -p run
           echo "eula=true" > run/eula.txt
-          timeout 480 gradle runServer --no-daemon > server.log 2>&1 || true
+          gradle runServer --no-daemon > server.log 2>&1 &
+          for i in $(seq 1 90); do
+            if grep -q "Done (" server.log; then break; fi
+            sleep 5
+          done
+          sleep 20
+          pkill -f java || true
           echo "---- deepvein / error lines ----"
-          grep -n -i "deepvein\|exception\|couldn't\|could not\|failed\|Done (" server.log | head -200 || true
+          grep -n -i "deepvein:\|exception\|couldn't\|could not\|parsing error\|Done (" server.log | head -200 || true
           grep -q "Done (" server.log
+      - name: Publish release
+        if: github.ref == 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release delete latest --yes --cleanup-tag || true
+          sleep 5
+          gh release create latest build/libs/*.jar --target "$GITHUB_SHA" \
+            --title "Deepvein (latest build)" \
+            --notes "Automatic build for Minecraft 1.20.1 with Forge 47.x. Put the .jar in your mods folder."
       - uses: actions/upload-artifact@v4
         if: always()
         with:
