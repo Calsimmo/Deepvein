@@ -26,6 +26,7 @@ public class DeepveinMod {
     public DeepveinMod() {
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         ModBlocks.BLOCKS.register(bus);
+        ModBlocks.BLOCK_ENTITIES.register(bus);
         ModItems.ITEMS.register(bus);
         ModItems.TABS.register(bus);
         ModEntities.ENTITIES.register(bus);

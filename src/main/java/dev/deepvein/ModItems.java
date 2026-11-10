@@ -6,9 +6,13 @@ import java.util.function.Supplier;
 import javax.annotation.Nullable;
 
 import dev.deepvein.entity.MagicBolt;
+import dev.deepvein.storage.Vault;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -70,6 +74,17 @@ public class ModItems {
     public static final RegistryObject<Item> LIFE_CRYSTAL_BLOCK = blockItem(ModBlocks.LIFE_CRYSTAL_BLOCK);
     public static final RegistryObject<Item> BLIGHTGRASS = blockItem(ModBlocks.BLIGHTGRASS);
     public static final RegistryObject<Item> BLIGHTSTONE = blockItem(ModBlocks.BLIGHTSTONE);
+
+    public static final RegistryObject<Item> VAULT_CORE = blockItem(ModBlocks.VAULT_CORE);
+    public static final RegistryObject<Item> VAULT_CELL = blockItem(ModBlocks.VAULT_CELL);
+
+    // Vault screen buttons (never obtainable)
+    public static final RegistryObject<Item> VAULT_BUTTON_PREV = simple("vault_button_prev");
+    public static final RegistryObject<Item> VAULT_BUTTON_NEXT = simple("vault_button_next");
+    public static final RegistryObject<Item> VAULT_BUTTON_SORT = simple("vault_button_sort");
+    public static final RegistryObject<Item> VAULT_BUTTON_DEPOSIT = simple("vault_button_deposit");
+    public static final RegistryObject<Item> VAULT_BUTTON_PAGE = simple("vault_button_page");
+    public static final RegistryObject<Item> VAULT_BUTTON_BLANK = simple("vault_button_blank");
 
     // Materials
     public static final RegistryObject<Item> RAW_EMBERITE = simple("raw_emberite");
@@ -138,6 +153,15 @@ public class ModItems {
     public static final RegistryObject<Item> EMBER_CHARM = described("ember_charm");
     public static final RegistryObject<Item> MANA_LOCKET = described("mana_locket");
 
+    public static final RegistryObject<Item> LODESTONE_CHARM = described("lodestone_charm");
+    public static final RegistryObject<Item> MINERS_LENS = described("miners_lens");
+
+    // Quality of life
+    public static final RegistryObject<Item> VAULT_REMOTE = ITEMS.register("vault_remote",
+            () -> new VaultRemoteItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> RECALL_MIRROR = ITEMS.register("recall_mirror",
+            () -> new RecallMirrorItem(new Item.Properties().stacksTo(1)));
+
     // Summons and utility
     public static final RegistryObject<Item> GLOOM_LANTERN = ITEMS.register("gloom_lantern",
             () -> new SummonItem(ModEntities.GLOOMWARDEN, true, SoundEvents.WITHER_SPAWN));
@@ -153,7 +177,12 @@ public class ModItems {
                     .title(Component.translatable("itemGroup.deepvein"))
                     .icon(() -> new ItemStack(EMBERITE_INGOT.get()))
                     .displayItems((params, output) ->
-                            ITEMS.getEntries().forEach(entry -> output.accept(entry.get())))
+                            ITEMS.getEntries().forEach(entry -> {
+                                String path = entry.getId().getPath();
+                                if (!path.startsWith("vault_button") && !path.endsWith("_bolt")) {
+                                    output.accept(entry.get());
+                                }
+                            }))
                     .build());
 
     // ---------------------------------------------------------------- armor
@@ -387,6 +416,80 @@ public class ModItems {
             if (!player.getAbilities().instabuild) {
                 stack.shrink(1);
             }
+            return InteractionResultHolder.success(stack);
+        }
+    }
+
+    /** Opens a linked Vault Core from anywhere in the same dimension while its chunk is loaded. */
+    public static class VaultRemoteItem extends DescItem {
+        public VaultRemoteItem(Item.Properties props) {
+            super(props);
+        }
+
+        @Override
+        public InteractionResult useOn(UseOnContext context) {
+            Level level = context.getLevel();
+            BlockPos pos = context.getClickedPos();
+            if (!(level.getBlockEntity(pos) instanceof Vault.CoreBlockEntity)) {
+                return InteractionResult.PASS;
+            }
+            if (!level.isClientSide) {
+                CompoundTag tag = context.getItemInHand().getOrCreateTag();
+                tag.putLong("VaultPos", pos.asLong());
+                tag.putString("VaultDim", level.dimension().location().toString());
+                Player player = context.getPlayer();
+                if (player != null) {
+                    player.displayClientMessage(Component.translatable("message.deepvein.remote_linked"), true);
+                }
+            }
+            return InteractionResult.SUCCESS;
+        }
+
+        @Override
+        public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+            ItemStack stack = player.getItemInHand(hand);
+            if (level.isClientSide) {
+                return InteractionResultHolder.success(stack);
+            }
+            CompoundTag tag = stack.getTag();
+            if (tag == null || !tag.contains("VaultPos")) {
+                player.displayClientMessage(Component.translatable("message.deepvein.remote_unlinked"), true);
+                return InteractionResultHolder.fail(stack);
+            }
+            BlockPos pos = BlockPos.of(tag.getLong("VaultPos"));
+            boolean sameDimension = level.dimension().location().toString().equals(tag.getString("VaultDim"));
+            if (sameDimension && level.isLoaded(pos)
+                    && level.getBlockEntity(pos) instanceof Vault.CoreBlockEntity core) {
+                Vault.open(player, core, true);
+                return InteractionResultHolder.success(stack);
+            }
+            player.displayClientMessage(Component.translatable("message.deepvein.remote_out_of_range"), true);
+            return InteractionResultHolder.fail(stack);
+        }
+    }
+
+    /** Teleports the player to their bed or respawn anchor, or to world spawn if they have none. */
+    public static class RecallMirrorItem extends DescItem {
+        public RecallMirrorItem(Item.Properties props) {
+            super(props);
+        }
+
+        @Override
+        public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+            ItemStack stack = player.getItemInHand(hand);
+            if (level.isClientSide || !(player instanceof ServerPlayer sp)) {
+                return InteractionResultHolder.success(stack);
+            }
+            BlockPos pos = sp.getRespawnPosition();
+            ServerLevel target = sp.server.getLevel(sp.getRespawnDimension());
+            if (pos == null || target == null) {
+                target = sp.server.overworld();
+                pos = target.getSharedSpawnPos();
+            }
+            sp.teleportTo(target, pos.getX() + 0.5D, pos.getY() + 1.0D, pos.getZ() + 0.5D,
+                    sp.getYRot(), sp.getXRot());
+            target.playSound(null, pos, SoundEvents.ENDERMAN_TELEPORT, SoundSource.PLAYERS, 1.0F, 1.0F);
+            sp.getCooldowns().addCooldown(this, 200);
             return InteractionResultHolder.success(stack);
         }
     }

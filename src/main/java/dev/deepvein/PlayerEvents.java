@@ -10,6 +10,7 @@ import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -30,9 +31,9 @@ public class PlayerEvents {
         return false;
     }
 
-    private static void grant(Player player, Item item, MobEffect effect, int amplifier) {
+    private static void grant(Player player, Item item, MobEffect effect, int amplifier, int duration) {
         if (hasAccessory(player, item)) {
-            player.addEffect(new MobEffectInstance(effect, 100, amplifier, true, false, true));
+            player.addEffect(new MobEffectInstance(effect, duration, amplifier, true, false, true));
         }
     }
 
@@ -51,10 +52,22 @@ public class PlayerEvents {
             Mana.sync(player);
         }
         if (player.tickCount % 20 == 0) {
-            grant(player, ModItems.SWIFT_CHARM.get(), MobEffects.MOVEMENT_SPEED, 0);
-            grant(player, ModItems.CLOUD_CHARM.get(), MobEffects.JUMP, 1);
-            grant(player, ModItems.AEGIS_BAND.get(), MobEffects.DAMAGE_RESISTANCE, 0);
-            grant(player, ModItems.EMBER_CHARM.get(), MobEffects.FIRE_RESISTANCE, 0);
+            grant(player, ModItems.SWIFT_CHARM.get(), MobEffects.MOVEMENT_SPEED, 0, 100);
+            grant(player, ModItems.CLOUD_CHARM.get(), MobEffects.JUMP, 1, 100);
+            grant(player, ModItems.AEGIS_BAND.get(), MobEffects.DAMAGE_RESISTANCE, 0, 100);
+            grant(player, ModItems.EMBER_CHARM.get(), MobEffects.FIRE_RESISTANCE, 0, 100);
+            grant(player, ModItems.MINERS_LENS.get(), MobEffects.NIGHT_VISION, 0, 400);
+        }
+        if (player.tickCount % 2 == 0 && hasAccessory(player, ModItems.LODESTONE_CHARM.get())) {
+            for (ItemEntity drop : player.level().getEntitiesOfClass(ItemEntity.class,
+                    player.getBoundingBox().inflate(6.0D))) {
+                if (!drop.hasPickUpDelay()) {
+                    Vec3 pull = player.position().add(0.0D, 0.5D, 0.0D).subtract(drop.position());
+                    if (pull.lengthSqr() > 0.01D) {
+                        drop.setDeltaMovement(pull.normalize().scale(0.35D));
+                    }
+                }
+            }
         }
     }
 

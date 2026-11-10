@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " G ",
+    "GLG",
+    " S "
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "L": {
+      "item": "minecraft:glass"
+    },
+    "S": {
+      "item": "minecraft:glowstone_dust"
+    }
+  },
+  "result": {
+    "item": "deepvein:miners_lens",
+    "count": 1
+  }
+}

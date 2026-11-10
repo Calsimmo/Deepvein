@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ECE",
+    "CDC",
+    "ECE"
+  ],
+  "key": {
+    "E": {
+      "item": "deepvein:emberite_ingot"
+    },
+    "C": {
+      "item": "minecraft:chest"
+    },
+    "D": {
+      "item": "minecraft:diamond"
+    }
+  },
+  "result": {
+    "item": "deepvein:vault_core",
+    "count": 1
+  }
+}

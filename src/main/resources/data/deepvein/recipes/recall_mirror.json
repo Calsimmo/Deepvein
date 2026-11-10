@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " D ",
+    "EGE",
+    " E "
+  ],
+  "key": {
+    "D": {
+      "item": "deepvein:stardust"
+    },
+    "E": {
+      "item": "deepvein:emberite_ingot"
+    },
+    "G": {
+      "item": "minecraft:glass"
+    }
+  },
+  "result": {
+    "item": "deepvein:recall_mirror",
+    "count": 1
+  }
+}

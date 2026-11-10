@@ -1,5 +1,6 @@
 package dev.deepvein;
 
+import dev.deepvein.storage.Vault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -12,6 +13,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DropExperienceBlock;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.registries.DeferredRegister;
@@ -34,6 +36,17 @@ public class ModBlocks {
             () -> new BlightBlock(BlockBehaviour.Properties.copy(Blocks.DIRT).randomTicks()));
     public static final RegistryObject<Block> BLIGHTSTONE = BLOCKS.register("blightstone",
             () -> new BlightBlock(BlockBehaviour.Properties.copy(Blocks.STONE).randomTicks()));
+
+    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =
+            DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, DeepveinMod.MODID);
+
+    public static final RegistryObject<Block> VAULT_CORE = BLOCKS.register("vault_core",
+            () -> new Vault.CoreBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
+    public static final RegistryObject<Block> VAULT_CELL = BLOCKS.register("vault_cell",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
+    public static final RegistryObject<BlockEntityType<Vault.CoreBlockEntity>> VAULT_CORE_BE =
+            BLOCK_ENTITIES.register("vault_core", () -> BlockEntityType.Builder
+                    .of(Vault.CoreBlockEntity::new, VAULT_CORE.get()).build(null));
 
     /** A block that slowly converts neighbouring grass, dirt and stone into blight. */
     public static class BlightBlock extends Block {

@@ -5,6 +5,8 @@
     "deepvein:gloomsilver_ore",
     "deepvein:aetherium_ore",
     "deepvein:life_crystal_block",
-    "deepvein:blightstone"
+    "deepvein:blightstone",
+    "deepvein:vault_core",
+    "deepvein:vault_cell"
   ]
 }

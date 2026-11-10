@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " R ",
+    "IEI",
+    " R "
+  ],
+  "key": {
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "E": {
+      "item": "deepvein:emberite_ingot"
+    }
+  },
+  "result": {
+    "item": "deepvein:lodestone_charm",
+    "count": 1
+  }
+}

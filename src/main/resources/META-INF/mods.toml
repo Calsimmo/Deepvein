@@ -4,7 +4,7 @@ license="All Rights Reserved"
 
 [[mods]]
 modId="deepvein"
-version="0.1.0"
+version="0.2.0"
 displayName="Deepvein"
 description="""
 An action-RPG overhaul: mana and magic, accessories, life crystals, three ore tiers,

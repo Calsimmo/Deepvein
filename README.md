@@ -1,21 +1,10 @@
 # Deepvein
 
-An action-RPG overhaul mod for Minecraft 1.20.1 (Forge 47.x). Version 0.1.0.
+An action-RPG overhaul mod for Minecraft 1.20.1 (Forge 47.x). Version 0.2.0.
 
-## Status
+## Download
 
-The source has not been compiled or run in the game yet. Expect a few compile fixes on the first build.
-
-## Getting the .jar
-
-Option A, GitHub builds it:
-
-1. Create a new empty repository on github.com.
-2. Upload everything in this folder, including the hidden `.github` folder.
-3. Open the repository's Actions tab and wait for "Build mod" to finish.
-4. Download the `deepvein-mod` artifact. The `.jar` is inside.
-
-Option B, build on a PC with Java 17 and Gradle 8.8 installed: run `gradle build`. The `.jar` appears in `build/libs`.
+The latest build is on the Releases page of this repository. Every push rebuilds it and starts a test server with the mod loaded.
 
 ## Installing
 
@@ -36,6 +25,8 @@ Option B, build on a PC with Java 17 and Gradle 8.8 installed: run `gradle build
 | Blight | Purple patches on the surface that slowly spread. Purity Powder cleanses them. |
 | Bosses | The Gloomwarden (Gloom Lantern, night only) and the Rift Tyrant (Rift Idol). |
 | Town | The Town Bell calls a Tinkerer who trades for emeralds. |
+| Storage | Vault Core with a paged screen, sort and quick-stack buttons. Each connected Vault Cell adds a page. Vault Remote opens it from afar. |
+| Utility | Recall Mirror, Lodestone Charm (item magnet), Miner's Lens (night vision). |
 
 ## Progression
 
