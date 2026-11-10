@@ -35,8 +35,9 @@ public class DeepveinMod {
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {
-        event.enqueueWork(() -> CHANNEL.registerMessage(0, ManaSync.class,
-                ManaSync::encode, ManaSync::decode, ManaSync::handle));
+        event.enqueueWork(() -> {
+            CHANNEL.registerMessage(0, ManaSync.class, ManaSync::encode, ManaSync::decode, ManaSync::handle);
+        });
     }
 
     public static void sendMana(ServerPlayer player, int mana, int max) {
